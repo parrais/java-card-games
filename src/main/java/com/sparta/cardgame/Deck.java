@@ -35,8 +35,7 @@ public class Deck {
             return deck.remove(0);
         } else {
             throw new IllegalStateException("The deck is empty!");
-        } // or System.out.println("The deck is empty!");
-          //  return null;
+        }
     }
 
     public void sortDeckIntoSuits() {

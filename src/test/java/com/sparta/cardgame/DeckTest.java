@@ -18,7 +18,6 @@ public class DeckTest {
 
     @Test
     @DisplayName("createDeck() builds 52 unique cards")
-
     void testCreateDeck_assertSizeOfDeck() {
         //Arrange
         Deck deck = createTestDeck();
@@ -37,7 +36,6 @@ public class DeckTest {
 
     @Test
     @DisplayName("shuffleDeck() randomises card order without changing(add/remove/duplicate) the deck")
-
     void testShuffleDeck_assertContentEquality_assertOrder() {
         //Arrange
         Deck deck = createTestDeck();
@@ -70,7 +68,6 @@ public class DeckTest {
 
     @Test
     @DisplayName("dealCard() returns a card and removes one from deck")
-
     void testDealCard_assertReturnObject_assertRemoval() {
         //Arrange
         Deck deck = createTestDeck();
@@ -83,9 +80,84 @@ public class DeckTest {
         assertNotNull(dealtCard, "Method dealCard() should return a Card object.");
         assertEquals(deckSize - 1, 51, "Deck size should decrease by one after dealing a card.");
 
-    }//end of test for dealCard()
+    }//end of test for dealCard() return card and removes one
 
-    
+    @Test
+    @DisplayName("dealCard() throws Exception when deck is empty")
+    void testDealCard_assertThrowsException_whenDeckIsEmpty() {
+        //Arrange
+        Deck deck = createTestDeck();
+
+        //Act
+        for (int i = 0; i < 52; i++) {
+            deck.dealCard();
+        }
+
+        //Assert
+        assertThrows(IllegalStateException.class, deck::dealCard,
+              "Method dealCard() should throw Exception when no cards in deck.");
+
+    }//end of test for dealCard() Exception
+
+    @Test
+    @DisplayName("sortDeckByValue() should arrange cards by suit, then by value, then reverse the order")
+    void testSortDeck_assertSortingBySuit_thenByValue_andReversedOrder() {
+        //Arrange
+        Deck deck = createTestDeck();
+        deck.shuffleDeck();
+
+        //Act
+        deck.sortDeckIntoSuits();
+
+        //Assert
+        List<Card> sortedDeck = new ArrayList<>();
+
+        for (int i = 0; i < 52; i++) {
+            sortedDeck.add(deck.dealCard());
+        }
+
+        for (int i = 1; i < sortedDeck.size(); i++) {
+            Card previousCard = sortedDeck.get(i - 1);
+            Card currentCard = sortedDeck.get(i);
+
+            int suitComparison = previousCard.getSuit().compareTo(currentCard.getSuit());
+            assertTrue(suitComparison >= 0,
+                    "Suit order should be descending due to .reversed().");
+
+            if (suitComparison == 0) {
+                assertTrue(previousCard.getValue() >= currentCard.getValue(),
+                        "Within same suit, cards should be sorted in descending value order too.");
+            }
+        }
+
+    }//end of test for sortDeckByValue() -> by suit, -> by value, -> reverse the order
+
+
+
+
+    @Test
+    @DisplayName("sortDeckByValue() should arrange cards in ascending order by value")
+    void testSortDeck_assertSorting_ascendingOrder_byValue() {
+        //Arrange
+        Deck deck = createTestDeck();
+        deck.shuffleDeck();
+
+        //Act
+        deck.sortDeckByValue();
+
+        //Assert
+        Card dealtCard = deck.dealCard();
+        while (true) {
+            try {
+                Card nextCard = deck.dealCard();
+                assertTrue(dealtCard.getValue() <= nextCard.getValue(),
+                    "Deck should be sorted in ascending order by value.");
+                dealtCard = nextCard;
+            } catch (IllegalStateException e) {
+                break;
+            }
+        }
+    }//end of test for sortDeckByValue() in ascending order
 
 
 
