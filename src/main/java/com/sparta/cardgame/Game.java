@@ -29,4 +29,5 @@ public abstract class Game {
     // SNAP EXTENSION
     //  abstract addCardToHand
     //  abstract method hasFinish
+    protected abstract boolean hasFinished();
 }
