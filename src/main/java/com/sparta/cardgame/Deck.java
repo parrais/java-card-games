@@ -32,7 +32,7 @@ public class Deck {
 
     public Card dealCard() {
         if (!deck.isEmpty()) {
-            return deck.removeFirst();
+            return deck.remove(0);
         } else {
             throw new IllegalStateException("The deck is empty!");
         } // or System.out.println("The deck is empty!");
@@ -45,5 +45,10 @@ public class Deck {
                         .reversed());
 
     }
-}
+
+    public void sortDeckByValue() {
+        deck.sort((c1, c2) -> c1.getValue() - c2.getValue());
+    }
+
+}//end of class
 
