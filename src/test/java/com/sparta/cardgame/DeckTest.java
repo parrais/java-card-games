@@ -132,9 +132,6 @@ public class DeckTest {
 
     }//end of test for sortDeckByValue() -> by suit, -> by value, -> reverse the order
 
-
-
-
     @Test
     @DisplayName("sortDeckByValue() should arrange cards in ascending order by value")
     void testSortDeck_assertSorting_ascendingOrder_byValue() {
@@ -158,8 +155,6 @@ public class DeckTest {
             }
         }
     }//end of test for sortDeckByValue() in ascending order
-
-
 
 
 }//end of test class
