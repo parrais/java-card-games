@@ -4,32 +4,40 @@ public class Card {
 //    String suit; // Diamonds
 //    String name; // Ace, 2, 9, Jack
 //    int value; // 2 - 11
-    public enum Suit{
-        Clubs,Diamonds,Hearts,Spades
-    }
-    public enum Name {
-        ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
-    }
 
     private final Suit suit;
-    private final Name name;
+    private final Rank rank;
 
     //constructor Card (suit, name) name -> value
-    public Card(Suit suit, Name name) {
+    public Card(Suit suit, Rank rank) {
         this.suit = suit;
-        this.name = name;
+        this.rank = rank;
     }
 
     // method getFormattedName () -> name + " of " suit
-    // method getShortName () -> name[0] + suit[0] ???
+    public String getFormattedName() {
+        String cardOutput = this.rank + " of " + this.suit;
+        return cardOutput;
+    }
 
-    // method getValue () -> value
+    // method getShortName () -> name[0] + suit[0] ??? ♣♦♥♠
+
+
     public int getValue(){
-        if (name.ordinal() >= 9){
-            return 10;
-        }
-        return name.ordinal()+1;
+        return rank.ordinal()+1;
     };
 
-    // method getName () -> name SNAP EXTENSION
+    public int getScore(){
+        if (rank.ordinal() >= 9){
+            return 10;
+        }
+        return rank.ordinal()+1;
+    };
+
+    @Override
+    public String toString() {
+        return getFormattedName();
+    }
+
+// method getName () -> name SNAP EXTENSION
 }
