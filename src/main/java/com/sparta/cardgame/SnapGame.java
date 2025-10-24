@@ -56,8 +56,7 @@ public class SnapGame{
                         computerHand.addToHand(discard.playCard());
                     }
                 }
-                System.out.println("Cards left: player: " + playerHand.getCards().size() + " opponent: " + computerHand.getCards().size());
-            }
+            } else { discard.addToHand(currentComputerCard);}
             promptEnterKey();
             currentPlayerCard = playerHand.playCard();
             System.out.println("You played the "+ currentPlayerCard);
@@ -72,8 +71,8 @@ public class SnapGame{
                 } else {
                     while (!discard.getCards().isEmpty()) {
                         computerHand.addToHand(discard.playCard());}
-                }System.out.println("Cards left: player: " + playerHand.getCards().size() + " opponent: " + computerHand.getCards().size());
-            }
+                }
+            } else { discard.addToHand(currentComputerCard);}
         }
 
 
