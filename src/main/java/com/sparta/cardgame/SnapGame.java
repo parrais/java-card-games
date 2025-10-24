@@ -1,4 +1,4 @@
-package com.sparta.cardgame;
-
-public class SnapGame extends Game{
-}
+//package com.sparta.cardgame;
+//
+//public class SnapGame extends Game{
+//}
