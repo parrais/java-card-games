@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public class Hand {
     private ArrayList<Card> cards;
+    private boolean aceInHand;
 
     public Hand() {
         cards = new ArrayList<Card>();
+        aceInHand = false;
     }
 
     public Hand(ArrayList<Card> cards) {
@@ -17,11 +19,7 @@ public class Hand {
         return cards;
     }
 
-    // method addToHand(Game?)
-//    public void addToHand(Deck gameDeck) {
-//        Card deckCard = gameDeck.deal();
-//        cards.add(deckCard);
-//    }
+
 
     public void clearHand() {
         cards = new ArrayList<>();
@@ -33,9 +31,16 @@ public class Hand {
 
     // method sumCards ()
     public int sumCards() {
+
         int total = 0;
         for (Card card : cards) {
+            if (card.getRank() == Rank.ACE) {
+                aceInHand = true;
+            }
             total += card.getScore();
+            }
+        if (aceInHand && total < 12) {
+            total += 10;
         }
         return total;
     }
