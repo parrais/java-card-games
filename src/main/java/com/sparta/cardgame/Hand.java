@@ -36,8 +36,13 @@ public class Hand {
         return total;
     }
 
-    // method playCard () SNAP EXTENSION
-
+    public Card playCard() {
+        if (!cards.isEmpty()) {
+            return cards.remove(0);
+        } else {
+            throw new IllegalStateException("The deck is empty!");
+        }
+    }
 
 }
 
