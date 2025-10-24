@@ -46,4 +46,8 @@ public class Deck {
 
     }
 }
-
+placeCards(); //them
+placeCards(); // you
+wait(1000);
+while (true)
+    if
