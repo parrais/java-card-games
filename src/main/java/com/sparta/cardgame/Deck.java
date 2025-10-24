@@ -49,7 +49,6 @@ public class Deck {
                 .thenComparing(Comparator.comparing(Card::getValue).reversed()));
     }
 
-
     public void sortDeckByValueThenSuitAsc() {
         deck.sort(Comparator.comparingInt(Card::getValue)
                 .thenComparing(Card::getSuit));
@@ -59,6 +58,7 @@ public class Deck {
         deck.sort(Comparator.comparingInt(Card::getValue).reversed()
                 .thenComparing(Comparator.comparing(Card::getSuit).reversed()));
     }
+
 
 }//end of class
 
