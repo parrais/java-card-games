@@ -100,14 +100,47 @@ public class DeckTest {
     }//end of test for dealCard() Exception
 
     @Test
-    @DisplayName("sortDeckByValue() should arrange cards by suit, then by value, then reverse the order")
-    void testSortDeck_assertSortingBySuit_thenByValue_andReversedOrder() {
+    @DisplayName("sortDeckIntoSuitsThenValueAsc() should arrange cards by suit, then by value")
+    void testSortDeck_assertSortingBySuit_thenByValue() {
         //Arrange
         Deck deck = createTestDeck();
         deck.shuffleDeck();
 
         //Act
-        deck.sortDeckIntoSuits();
+        deck.sortDeckIntoSuitsThenValueAsc();
+
+        //Assert
+        List<Card> sortedDeck = new ArrayList<>();
+
+        for (int i = 0; i < 52; i++) {
+            sortedDeck.add(deck.dealCard());
+        }
+
+        for (int i = 1; i < sortedDeck.size(); i++) {
+            Card previousCard = sortedDeck.get(i - 1);
+            Card currentCard = sortedDeck.get(i);
+
+            int suitComparison = previousCard.getSuit().compareTo(currentCard.getSuit());
+            assertTrue(suitComparison <= 0,
+                    "Suit order should be ascending.");
+
+            if (suitComparison == 0) {
+                assertTrue(previousCard.getValue() <= currentCard.getValue(),
+                        "Within same suit, cards should be sorted in ascending value order.");
+            }
+        }
+
+    }//end of test for sortDeckIntoSuitsThenValueAsc() -> cards by suit, then by value
+
+    @Test
+    @DisplayName("sortDeckIntoSuitsThenValueDesc() should arrange cards in descending order by value")
+    void testSortDeck_assertSorting_descendingOrder_bySuit_thenValue() {
+        //Arrange
+        Deck deck = createTestDeck();
+        deck.shuffleDeck();
+
+        //Act
+        deck.sortDeckIntoSuitsThenValueDesc();
 
         //Assert
         List<Card> sortedDeck = new ArrayList<>();
@@ -122,39 +155,14 @@ public class DeckTest {
 
             int suitComparison = previousCard.getSuit().compareTo(currentCard.getSuit());
             assertTrue(suitComparison >= 0,
-                    "Suit order should be descending due to .reversed().");
+                    "Suit order should be descending.");
 
             if (suitComparison == 0) {
                 assertTrue(previousCard.getValue() >= currentCard.getValue(),
-                        "Within same suit, cards should be sorted in descending value order too.");
+                        "Within same suit, cards should be sorted in descending value order.");
             }
         }
-
-    }//end of test for sortDeckByValue() -> by suit, -> by value, -> reverse the order
-
-    @Test
-    @DisplayName("sortDeckByValue() should arrange cards in ascending order by value")
-    void testSortDeck_assertSorting_ascendingOrder_byValue() {
-        //Arrange
-        Deck deck = createTestDeck();
-        deck.shuffleDeck();
-
-        //Act
-        deck.sortDeckByValue();
-
-        //Assert
-        Card dealtCard = deck.dealCard();
-        while (true) {
-            try {
-                Card nextCard = deck.dealCard();
-                assertTrue(dealtCard.getValue() <= nextCard.getValue(),
-                    "Deck should be sorted in ascending order by value.");
-                dealtCard = nextCard;
-            } catch (IllegalStateException e) {
-                break;
-            }
-        }
-    }//end of test for sortDeckByValue() in ascending order
+    }//end of test for sortDeckIntoSuitsThenValueDesc() should arrange cards in descending order
 
 
 }//end of test class
