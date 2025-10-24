@@ -38,16 +38,27 @@ public class Deck {
         }
     }
 
-    public void sortDeckIntoSuits() {
+    public void sortDeckIntoSuitsThenValueAsc() {
         deck.sort(Comparator.comparing(Card::getSuit)
-                        .thenComparing(Card::getValue)
-                        .reversed());
+                        .thenComparing(Card::getValue));
 
     }
 
-    public void sortDeckByValue() {
-        deck.sort((c1, c2) -> c1.getValue() - c2.getValue());
+    public void sortDeckIntoSuitsThenValueDesc() {
+        deck.sort(Comparator.comparing(Card::getSuit).reversed()
+                .thenComparing(Comparator.comparing(Card::getValue).reversed()));
     }
+
+    public void sortDeckByValueThenSuitAsc() {
+        deck.sort(Comparator.comparingInt(Card::getValue)
+                .thenComparing(Card::getSuit));
+    }
+
+    public void sortDeckByValueThenSuitDesc() {
+        deck.sort(Comparator.comparingInt(Card::getValue).reversed()
+                .thenComparing(Comparator.comparing(Card::getSuit).reversed()));
+    }
+
 
 }//end of class
 
