@@ -13,7 +13,7 @@ public class GameApp {
             switch (gameChoice) {
                 case 1:
                     System.out.println("You chose Blackjack");
-                    // play blackjack
+                    BlackjackGame game = new BlackjackGame();
                     break;
                 case 2:
                     System.out.println("You chose Snap!");
