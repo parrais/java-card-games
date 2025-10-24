@@ -1,6 +1,7 @@
 package com.sparta.cardgame;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class BlackjackGame  {
     private Deck deck;
@@ -9,6 +10,7 @@ public class BlackjackGame  {
     private Scanner scanner;
     private int playerScore;
     private int computerScore;
+    private boolean gameOver;
 
     public BlackjackGame() {
       deck = new Deck();
@@ -17,12 +19,14 @@ public class BlackjackGame  {
       scanner = new Scanner(System.in);
       playerScore = 0;
       computerScore = 0;
+      gameOver = false;
+      startGame();
     }
 
-    //    ----------- setup game ---------
     public void startGame() {
         System.out.println("Welcome to the Blackjack Game!🃏");
         while(playerScore !=3 && computerScore !=3){
+            System.out.println();
             playGame();
         }
         if(playerScore == 3){
@@ -33,6 +37,8 @@ public class BlackjackGame  {
     }
 
     private void playGame(){
+        playerHand.clearHand();
+        computerHand.clearHand();
         playerHand.addToHand(deck.dealCard());
         computerHand.addToHand(deck.dealCard());
         playerHand.addToHand(deck.dealCard());
@@ -50,7 +56,8 @@ public class BlackjackGame  {
                     showPlayArea( "player");
                     if (playerHand.sumCards() > 21) {
                         System.out.println("You lost!");
-                       computerScore += 1;
+                        computerScore += 1;
+                        gameOver = true;
                         break;
                     }
                 } else {
@@ -58,42 +65,46 @@ public class BlackjackGame  {
                 }
             }
         }
-
-        showPlayArea("computer");
-        if(!checkBlackJack(computerHand)){
-             while (computerHand.sumCards() < 17){
-              computerHand.addToHand(deck.dealCard());
-                 showPlayArea("computer");
-             }
-             if (computerHand.sumCards() > 21) {
-                 System.out.println("Dealer Busts! You win!");
-                 playerScore += 1;
-             } else if (checkBlackJack(playerHand)){
-                 System.out.println("You win!");
-                 playerScore += 1;
-             }  else {
-                 if (playerHand.sumCards() > computerHand.sumCards()) {
-                     System.out.println("You win!");
-                     playerScore += 1;
-                 } else if (computerHand.sumCards() > playerHand.sumCards()) {
-                     System.out.println("You lose! The Dealer wins");
-                     computerScore += 1;
-                 }  else {
-                     System.out.println("You lost! if you draw, the dealer wins");
-                     computerScore += 1;
-                 }
-             }
-        } else {
-            System.out.println("You lose! The Dealer got BlackJack!");
-            computerScore += 1;
+        if (!gameOver) {
+            showPlayArea("computer");
+            if(!checkBlackJack(computerHand)){
+                while (computerHand.sumCards() < 17){
+                    computerHand.addToHand(deck.dealCard());
+                    showPlayArea("computer");
+                }
+                if (computerHand.sumCards() > 21) {
+                    System.out.println("Dealer Busts! You win!");
+                    playerScore += 1;
+                    gameOver = true;
+                } else if (checkBlackJack(playerHand)){
+                    System.out.println("You win!");
+                    playerScore += 1;
+                    gameOver = true;
+                }  else {
+                    if (playerHand.sumCards() > computerHand.sumCards()) {
+                        System.out.println("You win!");
+                        playerScore += 1;
+                        gameOver = true;
+                    } else if (computerHand.sumCards() > playerHand.sumCards()) {
+                        System.out.println("You lose! The Dealer wins");
+                        computerScore += 1;
+                        gameOver = true;
+                    }  else {
+                        System.out.println("You lost! if you draw, the dealer wins");
+                        computerScore += 1;
+                        gameOver = true;
+                    }
+                }
+            } else {
+                System.out.println("You lose! The Dealer got BlackJack!");
+                computerScore += 1;
+                gameOver = true;
+            }
         }
-
-
     }
 
-
     private void showPlayArea(String user){
-        System.out.println("Dealer card: ");
+        System.out.println("Dealer's hand:");
         if(user.equals("player")){
             System.out.println(computerHand.getCards().get(0).getFormattedName());
         } else {
@@ -102,10 +113,12 @@ public class BlackjackGame  {
             }
         }
         System.out.println();
+        System.out.println("Your hand:");
         for(Card card : playerHand.getCards()){
             System.out.println(card.getFormattedName());
         }
     }
+
     private boolean checkBlackJack(Hand hand){
         if(hand.sumCards() == 21){
             return true;
@@ -113,23 +126,4 @@ public class BlackjackGame  {
             return false;
         }
     }
-
-
-
-
-
-//  Compare Results
-//    - if (playerSum > dealerSum && playerSum <= 21):
-//          print("Player Wins!")
-//    - else if (playerSum == dealerSum):
-//          print("It's a Tie!")
-//    - else:
-//          print("Dealer Wins!")
-
-
-    //
-
-
-
-
 }

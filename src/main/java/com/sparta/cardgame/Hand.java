@@ -23,6 +23,10 @@ public class Hand {
 //        cards.add(deckCard);
 //    }
 
+    public void clearHand() {
+        cards = new ArrayList<>();
+    }
+
     public void addToHand(Card card) {
         cards.add(card);
     }
