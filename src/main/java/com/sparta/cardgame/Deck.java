@@ -50,8 +50,14 @@ public class Deck {
     }
 
 
-    public void sortDeckByValue() {
-        deck.sort((c1, c2) -> c1.getValue() - c2.getValue());
+    public void sortDeckByValueThenSuitAsc() {
+        deck.sort(Comparator.comparingInt(Card::getValue)
+                .thenComparing(Card::getSuit));
+    }
+
+    public void sortDeckByValueThenSuitDesc() {
+        deck.sort(Comparator.comparingInt(Card::getValue).reversed()
+                .thenComparing(Comparator.comparing(Card::getSuit).reversed()));
     }
 
 }//end of class

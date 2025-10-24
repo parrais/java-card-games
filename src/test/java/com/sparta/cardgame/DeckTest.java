@@ -164,5 +164,68 @@ public class DeckTest {
         }
     }//end of test for sortDeckIntoSuitsThenValueDesc() should arrange cards in descending order
 
+    @Test
+    @DisplayName("sortDeckByValueThenSuitAsc() should arrange cards by value, then by suit in an ascending order")
+    void testSortDeck_assertSortingByValue_thenBySuit_Asc() {
+        //Arrange
+        Deck deck = createTestDeck();
+        deck.shuffleDeck();
+
+        //Act
+        deck.sortDeckByValueThenSuitAsc();
+
+        //Assert
+        List<Card> sortedDeck = new ArrayList<>();
+
+        for (int i = 0; i < 52; i++) {
+            sortedDeck.add(deck.dealCard());
+        }
+
+        for (int i = 1; i < sortedDeck.size(); i++) {
+            Card previousCard = sortedDeck.get(i - 1);
+            Card currentCard = sortedDeck.get(i);
+
+            int valueComparison = previousCard.getValue() - currentCard.getValue();
+            assertTrue(valueComparison <= 0,
+                    "Value order should be ascending.");
+
+            if (valueComparison == 0) {
+                assertTrue((previousCard.getSuit().compareTo(currentCard.getSuit()) <= 0),
+                        "Within same value, cards should be sorted in ascending suit order.");
+            }
+        }
+    }//end of test for sortDeckByValueThenSuitAsc() should arrange cards by value, then by suit in ascending order
+
+    @Test
+    @DisplayName("sortDeckByValueThenSuitDesc() should arrange cards by value, then by suit in a descending order")
+    void testSortDeck_assertSortingByValue_thenBySuit_Desc() {
+        //Arrange
+        Deck deck = createTestDeck();
+        deck.shuffleDeck();
+
+        //Act
+        deck.sortDeckByValueThenSuitDesc();
+
+        //Assert
+        List<Card> sortedDeck = new ArrayList<>();
+
+        for (int i = 0; i < 52; i++) {
+            sortedDeck.add(deck.dealCard());
+        }
+
+        for (int i = 1; i < sortedDeck.size(); i++) {
+            Card previousCard = sortedDeck.get(i - 1);
+            Card currentCard = sortedDeck.get(i);
+
+            int valueComparison = previousCard.getValue() - currentCard.getValue();
+            assertTrue(valueComparison >= 0,
+                    "Value order should be descending.");
+
+            if (valueComparison == 0) {
+                assertTrue((previousCard.getSuit().compareTo(currentCard.getSuit()) >= 0),
+                        "Within same value, cards should be sorted in descending suit order.");
+            }
+        }
+    }//end of test for sortDeckByValueThenSuitDesc() should arrange cards by value, then by suit in descending order
 
 }//end of test class
