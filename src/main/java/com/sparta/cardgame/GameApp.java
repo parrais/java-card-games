@@ -17,7 +17,7 @@ public class GameApp {
                     break;
                 case 2:
                     System.out.println("You chose Snap!");
-                    // play snap
+                    SnapGame thisGame = new SnapGame();
                     break;
                 case 0:
                     System.out.println("Good bye, please return soon...");
