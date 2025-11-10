@@ -23,7 +23,7 @@ public class SnapGame{
                 !computerHand.getCards().isEmpty()) {
             playSnapGame();
         }
-        if(!playerHand.getCards().isEmpty()){
+        if(playerHand.getCards().isEmpty()){
             System.out.println("Sorry, you lost at Snap!");
         } else {
             System.out.println("Congratulations, you won at Snap!");
