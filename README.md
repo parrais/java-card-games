@@ -31,7 +31,10 @@
     <li>
       <a href="#getting-started">Getting Started</a>
     </li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#project-team">Project Team</a></li>
+                <ul>
+        <li><a href="#top-contributors">Top Contributors</a></li>
+      </ul>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -71,11 +74,7 @@ To get a local copy up and running, ensure you complete the following:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Top contributors:
 
-<a href="https://github.com/parrais/java-card-games/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=parrais/java-card-games" alt="contrib.rocks image" />
-</a>
 
 <!-- CONTACT -->
 
@@ -87,6 +86,12 @@ To get a local copy up and running, ensure you complete the following:
 - Kaki Lai - [@kakiCoder511](https://www.github.com/kakiCoder511)
 - Leda - [@Leda909](https://www.github.com/Leda909)
 - Shannel
+
+### Top contributors:
+
+<a href="https://github.com/parrais/java-card-games/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=parrais/java-card-games" alt="contrib.rocks image" />
+</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
