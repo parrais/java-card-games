@@ -85,7 +85,7 @@ To get a local copy up and running, ensure you complete the following:
 - Matt Lewis - [@parrais](https://www.github.com/parrais)
 - Kaki Lai - [@kakiCoder511](https://www.github.com/kakiCoder511)
 - Leda - [@Leda909](https://www.github.com/Leda909)
-- Shannel
+- Shannel Feranand
 
 ### Top contributors:
 
